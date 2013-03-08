@@ -1,0 +1,31 @@
+{
+  "name": "throat",
+  "version": "0.0.0",
+  "description": "Throttle a collection of promise returning functions",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ForbesLindesay/throat.git"
+  },
+  "keywords": [
+    "promise",
+    "aplus",
+    "then",
+    "throttle",
+    "concurrency",
+    "limit"
+  ],
+  "author": {
+    "name": "ForbesLindesay"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "promise": "~2.0"
+  },
+  "devDependencies": {
+    "mocha": "~1",
+    "better-assert": "~1.0"
+  }
+}
