@@ -1,8 +1,16 @@
 {
   "name": "throat",
   "version": "0.0.0",
-  "description": "Throttle the parallelism of an asynchronous function",
-  "keywords": [],
+  "description": "Throttle the parallelism of an asynchronous (promise returning) function / functions",
+  "keywords": [
+    "promise",
+    "aplus",
+    "then",
+    "throttle",
+    "concurrency",
+    "parallelism",
+    "limit"
+  ],
   "dependencies": {
     "promise": "~3.2.0"
   },
