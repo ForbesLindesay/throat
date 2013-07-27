@@ -1,78 +1,46 @@
-var Promise = require('promise');
+'use strict'
 
-module.exports = throttler;
-function throttler(concurrency) {
-  var inProgress = 0;
-  var queue = [];
-  function throttle(fn) {
-    if (typeof fn != 'function') {
-      return reject(new TypeError(fn + ' is not a function.'));
-    }
-    if (idle() > 0) {
-      var result = resolve(null)
-        .then(function () {
-          return fn();
-        });
-      inProgress++;
-      result.then(null, function () {})
-            .then(function () {
-              inProgress--;
-              if (queue.length) {
-                queue.shift()();
-              }
-            });
-      return result;
-    } else {
-      return new Promise(function (resolve, reject) {
-        queue.push(function () {
-          resolve(throttle(fn));
-        });
-      });
-    }
-  }
-  throttle.workers = workers;
-  function workers(val) {
-    if (typeof val === 'number')
-      return concurrency = val;
-    else return concurrency;
-  }
-  throttle.running = running;
-  function running() {
-    return inProgress;
-  }
-  throttle.idle = idle;
-  function idle() {
-    return concurrency - inProgress;
-  }
+var Promise = require('promise')
 
-  throttle.workOn = function (source, worker, errHandler) {
-    errHandler = errHandler || function (err) { throw err; };
-    function nextJob() {
-      throttle(function () {
-        return source()
-          .then(function (job) {
-            nextJob();
-            return worker(job);
-          });
+module.exports = throat
+function throat(size, fn) {
+  var queue = []
+  function run(fn, self, args) {
+    if (size) {
+      size--
+      var result = new Promise(function (resolve) {
+        resolve(fn.apply(self, args))
       })
-      .then(null, function (err) {
-        process.nextTick(function () {
-          errHandler(err);
-        });
-      });
+      result.done(release, release)
+      return result
+    } else {
+      return new Promise(function (resolve) {
+        queue.push(new Delayed(resolve, fn, self, args))
+      })
     }
-    nextJob();
-  };
-  return throttle;
+  }
+  function release() {
+    size++
+    if (queue.length) {
+      var next = queue.shift()
+      next.resolve(run(next.fn, next.self, next.args))
+    }
+  }
+  if (typeof fn === 'function') {
+    return function () {
+      var args = arguments
+      return run(fn, this, arguments)
+    }
+  } else {
+    return function (fn) {
+      return run(fn, this, Array.prototype.slice.call(arguments, 1))
+    }
+  }
 }
 
-function resolve(value) {
-  return new Promise(function (resolve) {
-    resolve(value);
-  });
-}
-function reject(reason) {
-  return new Promise(function (resolve, reject) {
-    reject(reason);
-  });
+function Delayed(resolve, fn, self, args) {
+  this.resolve = resolve
+  this.fn = fn
+  this.self = self || null
+  this.args = args || null
 }

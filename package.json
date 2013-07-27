@@ -1,7 +1,14 @@
 {
   "name": "throat",
   "version": "0.0.0",
-  "description": "Throttle a collection of promise returning functions",
+  "description": "Throttle the parallelism of an asynchronous function",
+  "keywords": [],
+  "dependencies": {
+    "promise": "~3.2.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
   "scripts": {
     "test": "mocha -R spec"
   },
@@ -9,23 +16,6 @@
     "type": "git",
     "url": "https://github.com/ForbesLindesay/throat.git"
   },
-  "keywords": [
-    "promise",
-    "aplus",
-    "then",
-    "throttle",
-    "concurrency",
-    "limit"
-  ],
-  "author": {
-    "name": "ForbesLindesay"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "promise": "~2.0"
-  },
-  "devDependencies": {
-    "mocha": "~1",
-    "better-assert": "~1.0"
-  }
+  "author": "ForbesLindesay",
+  "license": "MIT"
 }
