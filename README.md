@@ -2,9 +2,9 @@
 
 Throttle the parallelism of an asynchronous, promise returning, function / functions.  This has special utility when you set the concurrency to `1`.  That way you get a mutually exclusive lock.
 
-[![Build Status](https://travis-ci.org/ForbesLindesay/throat.png?branch=master)](https://travis-ci.org/ForbesLindesay/throat)
-[![Dependency Status](https://gemnasium.com/ForbesLindesay/throat.png)](https://gemnasium.com/ForbesLindesay/throat)
-[![NPM version](https://badge.fury.io/js/throat.png)](http://badge.fury.io/js/throat)
+[![Build Status](https://img.shields.io/travis/ForbesLindesay/throat/master.svg)](https://travis-ci.org/ForbesLindesay/throat)
+[![Dependency Status](https://img.shields.io/gemnasium/ForbesLindesay/throat.svg)](https://gemnasium.com/ForbesLindesay/throat)
+[![NPM version](https://img.shields.io/npm/v/throat.svg)](http://badge.fury.io/js/throat)
 
 ## Installation
 
