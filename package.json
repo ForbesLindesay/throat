@@ -11,11 +11,13 @@
     "parallelism",
     "limit"
   ],
-  "dependencies": {
-    "promise": "~3.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "*"
+    "bluebird": "^2.2.2",
+    "es6-promise": "^1.0.0",
+    "mocha": "*",
+    "promise": "^3.2.0",
+    "q": "^1.0.1"
   },
   "scripts": {
     "test": "mocha -R spec"
