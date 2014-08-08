@@ -9,7 +9,7 @@ module.exports = function(Promise) {
         var result = new Promise(function (resolve) {
           resolve(fn.apply(self, args))
         })
-        result.done(release, release)
+        result.then(release, release)
         return result
       } else {
         return new Promise(function (resolve) {

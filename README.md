@@ -1,6 +1,6 @@
 # throat
 
-Throttle the parallelism of an asynchronous, promise returning, function / functions.  This has special utility when you set the concurrency to `1`.  That way you get a mutually exclusive lock.
+Throttle the parallelism of an asynchronous, promise returning, function / functions. This has special utility when you set the concurrency to `1`.  That way you get a mutually exclusive lock. Works with [Q](https://github.com/kriskowal/q), [Bluebird](https://github.com/petkaantonov/bluebird), [es6-promise](https://github.com/jakearchibald/es6-promise) and any other ES6 compliant library.
 
 [![Build Status](https://img.shields.io/travis/ForbesLindesay/throat/master.svg)](https://travis-ci.org/ForbesLindesay/throat)
 [![Dependency Status](https://img.shields.io/gemnasium/ForbesLindesay/throat.svg)](https://gemnasium.com/ForbesLindesay/throat)
@@ -19,7 +19,7 @@ This returns a function that acts a bit like a lock (exactly as a lock if concur
 Example, only 2 of the following functions will execute at any one time:
 
 ```js
-var Promise = require('promise')
+var Promise = require(...)
 var throat = require('throat')(Promise)
 var throat2 = throat(2)
 
