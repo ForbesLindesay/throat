@@ -1,6 +1,6 @@
 var Promise = require('promise');
 var assert = require('assert');
-var throat = require('../');
+var throat = require('../')(Promise);
 
 var sentA = {}, sentB = {}, sentC = {}
 function job() {

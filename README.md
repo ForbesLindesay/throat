@@ -19,25 +19,27 @@ This returns a function that acts a bit like a lock (exactly as a lock if concur
 Example, only 2 of the following functions will execute at any one time:
 
 ```js
-var throat = require('throat')(2)
+var Promise = require('promise')
+var throat = require('throat')(Promise)
+var throat2 = throat(2)
 
-var resA = throat(function () {
+var resA = throat2(function () {
   //async stuff
   return promise
 })
-var resA = throat(function () {
+var resA = throat2(function () {
   //async stuff
   return promise
 })
-var resA = throat(function () {
+var resA = throat2(function () {
   //async stuff
   return promise
 })
-var resA = throat(function () {
+var resA = throat2(function () {
   //async stuff
   return promise
 })
-var resA = throat(function () {
+var resA = throat2(function () {
   //async stuff
   return promise
 })

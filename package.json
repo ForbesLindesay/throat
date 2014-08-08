@@ -12,9 +12,9 @@
     "limit"
   ],
   "dependencies": {
-    "promise": "~3.2.0"
   },
   "devDependencies": {
+    "promise": "~3.2.0",
     "mocha": "*"
   },
   "scripts": {
