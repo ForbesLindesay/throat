@@ -52,6 +52,12 @@ var resA = throat(function () {
 This returns a function that is an exact copy of `worker` except that it will only execute up to `concurrency` times in parallel before further requests are queued:
 
 ```js
+// with polyfill or in iojs
+require('promise/polyfill')
+var throat = require('throat')
+// alternatively provide your own promise implementation
+var throat = require('throat')(require('promise'))
+
 var input = ['fileA.txt', 'fileB.txt', 'fileC.txt', 'fileD.txt']
 var data = Promise.all(input.map(throat(2, function (fileName) {
   return readFile(fileName)
