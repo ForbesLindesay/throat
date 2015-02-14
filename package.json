@@ -13,12 +13,11 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "mocha": "*",
     "promise": "^6.1.0",
     "testit": "^2.0.2"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "node test/index.js"
   },
   "repository": {
     "type": "git",
