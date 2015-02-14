@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var test = require('testit');
 var Promise = require('promise');
 var throat = require('../')(Promise);
 
@@ -45,8 +46,8 @@ function worker(max) {
   return execute
 }
 
-describe('throat(n)', function () {
-  it('throat(1) acts as a lock', function (done) {
+test('throat(n)', function () {
+  test('throat(1) acts as a lock', function (done) {
     var lock = throat(1)
     var a = job(), b = job(), c = job();
     var resA = lock(a)
@@ -81,7 +82,7 @@ describe('throat(n)', function () {
     })
     .nodeify(done)
   })
-  it('throat(2) lets two processes acquire the same lock', function (done) {
+  test('throat(2) lets two processes acquire the same lock', function (done) {
     var lock = throat(2)
     var a = job(), b = job(), c = job();
     var resA = lock(a)
@@ -116,7 +117,7 @@ describe('throat(n)', function () {
     })
     .nodeify(done)
   })
-  it('throat(3) lets three processes acquire the same lock', function (done) {
+  test('throat(3) lets three processes acquire the same lock', function (done) {
     var lock = throat(3)
     var a = job(), b = job(), c = job();
     var resA = lock(a)
@@ -154,8 +155,8 @@ describe('throat(n)', function () {
 })
 
 
-describe('throat(n, fn)', function () {
-  it('throat(1, fn) acts as a sequential worker', function (done) {
+test('throat(n, fn)', function () {
+  test('throat(1, fn) acts as a sequential worker', function (done) {
     Promise.all([sentA, sentB, sentC].map(throat(1, worker(1))))
       .then(function (res) {
         assert(res[0] instanceof Processed && res[0].val.length > 1 && res[0].val[0] === sentA)
@@ -164,7 +165,7 @@ describe('throat(n, fn)', function () {
       })
       .nodeify(done)
   })
-  it('throat(2, fn) works on two inputs in parallel', function (done) {
+  test('throat(2, fn) works on two inputs in parallel', function (done) {
     Promise.all([sentA, sentB, sentC].map(throat(2, worker(2))))
       .then(function (res) {
         assert(res[0] instanceof Processed && res[0].val.length > 1 && res[0].val[0] === sentA)
@@ -173,7 +174,7 @@ describe('throat(n, fn)', function () {
       })
       .nodeify(done)
   })
-  it('throat(3, fn) works on three inputs in parallel', function (done) {
+  test('throat(3, fn) works on three inputs in parallel', function (done) {
     Promise.all([sentA, sentB, sentC].map(throat(3, worker(3))))
       .then(function (res) {
         assert(res[0] instanceof Processed && res[0].val.length > 1 && res[0].val[0] === sentA)
