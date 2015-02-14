@@ -19,7 +19,11 @@ This returns a function that acts a bit like a lock (exactly as a lock if concur
 Example, only 2 of the following functions will execute at any one time:
 
 ```js
+// with polyfill or in iojs
+require('promise/polyfill')
 var throat = require('throat')(2)
+// alternatively provide your own promise implementation
+var throat = require('throat')(require('promise'))(2)
 
 var resA = throat(function () {
   //async stuff

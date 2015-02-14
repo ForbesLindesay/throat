@@ -11,11 +11,11 @@
     "parallelism",
     "limit"
   ],
-  "dependencies": {
-    "promise": "~3.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "promise": "^6.1.0",
+    "testit": "^2.0.2"
   },
   "scripts": {
     "test": "mocha -R spec"

@@ -1,6 +1,8 @@
-var Promise = require('promise');
+'use strict';
+
 var assert = require('assert');
-var throat = require('../');
+var Promise = require('promise');
+var throat = require('../')(Promise);
 
 var sentA = {}, sentB = {}, sentC = {}
 function job() {

@@ -1,40 +1,64 @@
 'use strict'
 
-var Promise = require('promise')
+var PromiseConstructor;
+if (typeof Promise === 'function') {
+  PromiseConstructor = Promise;
+}
 
-module.exports = throat
-function throat(size, fn) {
-  var queue = []
-  function run(fn, self, args) {
-    if (size) {
-      size--
-      var result = new Promise(function (resolve) {
-        resolve(fn.apply(self, args))
-      })
-      result.done(release, release)
-      return result
+module.exports = function (PromiseArgument) {
+  var Promise;
+  function throat(size, fn) {
+    var queue = []
+    function run(fn, self, args) {
+      if (size) {
+        size--
+        var result = new Promise(function (resolve) {
+          resolve(fn.apply(self, args))
+        })
+        result.done(release, release)
+        return result
+      } else {
+        return new Promise(function (resolve) {
+          queue.push(new Delayed(resolve, fn, self, args))
+        })
+      }
+    }
+    function release() {
+      size++
+      if (queue.length) {
+        var next = queue.shift()
+        next.resolve(run(next.fn, next.self, next.args))
+      }
+    }
+    if (typeof size === 'function' && typeof fn === 'number') {
+      var temp = fn;
+      fn = size;
+      size = fn;
+    }
+    if (typeof fn === 'function') {
+      return function () {
+        var args = [];
+        for (var i = 0; i < arguments.length; i++) {
+          args.push(arguments[i]);
+        }
+        return run(fn, this, args)
+      }
     } else {
-      return new Promise(function (resolve) {
-        queue.push(new Delayed(resolve, fn, self, args))
-      })
+      return function (fn) {
+        var args = [];
+        for (var i = 1; i < arguments.length; i++) {
+          args.push(arguments[i]);
+        }
+        return run(fn, this, args)
+      }
     }
   }
-  function release() {
-    size++
-    if (queue.length) {
-      var next = queue.shift()
-      next.resolve(run(next.fn, next.self, next.args))
-    }
-  }
-  if (typeof fn === 'function') {
-    return function () {
-      var args = arguments
-      return run(fn, this, arguments)
-    }
+  if (typeof arguments[0] === 'number' || typeof arguments[1] === 'number') {
+    Promise = PromiseConstructor;
+    return throat(arguments[0], arguments[1]);
   } else {
-    return function (fn) {
-      return run(fn, this, Array.prototype.slice.call(arguments, 1))
-    }
+    Promise = PromiseArgument;
+    return throat;
   }
 }
 
