@@ -16,10 +16,12 @@
     "coveralls": "^2.11.2",
     "istanbul": "^0.3.5",
     "promise": "^6.1.0",
+    "sauce-test": "^1.0.0",
+    "test-result": "^2.0.0",
     "testit": "^2.0.2"
   },
   "scripts": {
-    "test": "node test/index.js",
+    "test": "node test/index.js && node test/browser.js",
     "coverage": "istanbul cover test/index.js",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },

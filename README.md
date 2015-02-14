@@ -7,6 +7,8 @@ Throttle the parallelism of an asynchronous, promise returning, function / funct
 [![Dependency Status](https://img.shields.io/gemnasium/ForbesLindesay/throat.svg)](https://gemnasium.com/ForbesLindesay/throat)
 [![NPM version](https://img.shields.io/npm/v/throat.svg)](http://badge.fury.io/js/throat)
 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/throat.svg)](https://saucelabs.com/u/throat)
+
 ## Installation
 
     npm install throat
