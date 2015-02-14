@@ -1,10 +1,5 @@
 'use strict'
 
-var PromiseConstructor;
-if (typeof Promise === 'function') {
-  PromiseConstructor = Promise;
-}
-
 module.exports = function (PromiseArgument) {
   var Promise;
   function throat(size, fn) {
@@ -33,7 +28,7 @@ module.exports = function (PromiseArgument) {
     if (typeof size === 'function' && typeof fn === 'number') {
       var temp = fn;
       fn = size;
-      size = fn;
+      size = temp;
     }
     if (typeof fn === 'function') {
       return function () {
@@ -54,7 +49,10 @@ module.exports = function (PromiseArgument) {
     }
   }
   if (typeof arguments[0] === 'number' || typeof arguments[1] === 'number') {
-    Promise = PromiseConstructor;
+    Promise = module.exports.Promise;
+    if (typeof Promise !== 'function') {
+      throw new Error('You must provide a Promise polyfill for this library to work in older environments');
+    }
     return throat(arguments[0], arguments[1]);
   } else {
     Promise = PromiseArgument;
@@ -62,9 +60,14 @@ module.exports = function (PromiseArgument) {
   }
 }
 
+/* istanbul ignore next */
+if (typeof Promise === 'function') {
+  module.exports.Promise = Promise;
+}
+
 function Delayed(resolve, fn, self, args) {
   this.resolve = resolve
   this.fn = fn
   this.self = self || null
-  this.args = args || null
+  this.args = args
 }
