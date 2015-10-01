@@ -13,17 +13,20 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "browserify": "^11.2.0",
     "coveralls": "^2.11.2",
     "istanbul": "^0.3.5",
     "promise": "^6.1.0",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
-    "testit": "^2.0.2"
+    "testit": "^2.0.2",
+    "uglify-js": "^2.4.24"
   },
   "scripts": {
     "test": "node test/index.js && node test/browser.js",
     "coverage": "istanbul cover test/index.js",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
+    "build": "browserify index -s throat | uglifyjs > index.browser.min.js"
   },
   "repository": {
     "type": "git",
