@@ -18,7 +18,7 @@
     "promise": "^6.1.0",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
-    "testit": "^2.0.2"
+    "testit": "^2.0.5"
   },
   "scripts": {
     "test": "node test/index.js && node test/browser.js",

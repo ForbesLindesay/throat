@@ -25,10 +25,20 @@ module.exports = function (PromiseArgument) {
         next.resolve(run(next.fn, next.self, next.args))
       }
     }
-    if (typeof size === 'function' && typeof fn === 'number') {
+    if (typeof size === 'function') {
       var temp = fn;
       fn = size;
       size = temp;
+    }
+    if (typeof size !== 'number') {
+      throw new TypeError(
+        'Expected throat size to be a number but got ' + typeof size
+      );
+    }
+    if (fn !== undefined && typeof fn !== 'function') {
+      throw new TypeError(
+        'Expected throat fn to be a function but got ' + typeof fn
+      );
     }
     if (typeof fn === 'function') {
       return function () {
@@ -36,27 +46,34 @@ module.exports = function (PromiseArgument) {
         for (var i = 0; i < arguments.length; i++) {
           args.push(arguments[i]);
         }
-        return run(fn, this, args)
+        return run(fn, this, args);
       }
     } else {
       return function (fn) {
+        if (typeof fn !== 'function') {
+          throw new TypeError(
+            'Expected throat fn to be a function but got ' + typeof fn
+          );
+        }
         var args = [];
         for (var i = 1; i < arguments.length; i++) {
           args.push(arguments[i]);
         }
-        return run(fn, this, args)
+        return run(fn, this, args);
       }
     }
   }
-  if (typeof arguments[0] === 'number' || typeof arguments[1] === 'number') {
-    Promise = module.exports.Promise;
-    if (typeof Promise !== 'function') {
-      throw new Error('You must provide a Promise polyfill for this library to work in older environments');
-    }
-    return throat(arguments[0], arguments[1]);
-  } else {
+  if (arguments.length === 1 && typeof PromiseArgument === 'function') {
     Promise = PromiseArgument;
     return throat;
+  } else {
+    Promise = module.exports.Promise;
+    if (typeof Promise !== 'function') {
+      throw new Error(
+        'You must provide a Promise polyfill for this library to work in older environments'
+      );
+    }
+    return throat(arguments[0], arguments[1]);
   }
 }
 
