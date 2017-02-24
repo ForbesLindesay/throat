@@ -1,5 +1,7 @@
 # throat
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ForbesLindesay/throat.svg)](https://greenkeeper.io/)
+
 Throttle the parallelism of an asynchronous, promise returning, function / functions.  This has special utility when you set the concurrency to `1`.  That way you get a mutually exclusive lock.
 
 [![Build Status](https://img.shields.io/travis/ForbesLindesay/throat/master.svg)](https://travis-ci.org/ForbesLindesay/throat)
