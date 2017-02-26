@@ -26,7 +26,7 @@ run(__dirname + '/index.js', LOCAL ? 'chromedriver' : 'saucelabs', {
       case 'internet explorer':
         return version > 8;
       case 'firefox':
-        return version > 4;
+        return version > 19 && version !== 49;
       case 'iphone':
       case 'ipad':
         return version > 5.1;
