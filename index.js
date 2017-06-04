@@ -1,28 +1,30 @@
 'use strict'
 
+var Deque = require('double-ended-queue');
+
 module.exports = function (PromiseArgument) {
   var Promise;
   function throat(size, fn) {
-    var queue = []
+    var queue = new Deque();
     function run(fn, self, args) {
       if (size) {
-        size--
+        size--;
         var result = new Promise(function (resolve) {
-          resolve(fn.apply(self, args))
-        })
-        result.then(release, release)
-        return result
+          resolve(fn.apply(self, args));
+        });
+        result.then(release, release);
+        return result;
       } else {
         return new Promise(function (resolve) {
-          queue.push(new Delayed(resolve, fn, self, args))
-        })
+          queue.push(new Delayed(resolve, fn, self, args));
+        });
       }
     }
     function release() {
-      size++
-      if (queue.length) {
-        var next = queue.shift()
-        next.resolve(run(next.fn, next.self, next.args))
+      size++;
+      if (!queue.isEmpty()) {
+        var next = queue.shift();
+        next.resolve(run(next.fn, next.self, next.args));
       }
     }
     if (typeof size === 'function') {
@@ -83,8 +85,8 @@ if (typeof Promise === 'function') {
 }
 
 function Delayed(resolve, fn, self, args) {
-  this.resolve = resolve
-  this.fn = fn
-  this.self = self || null
-  this.args = args
+  this.resolve = resolve;
+  this.fn = fn;
+  this.self = self || null;
+  this.args = args;
 }
