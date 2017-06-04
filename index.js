@@ -1,9 +1,11 @@
 'use strict'
 
+var Deque = require('double-ended-queue');
+
 module.exports = function (PromiseArgument) {
   var Promise;
   function throat(size, fn) {
-    var queue = [];
+    var queue = new Deque();
     function run(fn, self, args) {
       if (size) {
         size--;
@@ -20,7 +22,7 @@ module.exports = function (PromiseArgument) {
     }
     function release() {
       size++;
-      if (queue.length) {
+      if (!queue.isEmpty()) {
         var next = queue.shift();
         next.resolve(run(next.fn, next.self, next.args));
       }
