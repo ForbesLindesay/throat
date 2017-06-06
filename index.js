@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
-var Deque = require('double-ended-queue');
+var Denque = require('denque');
 
 module.exports = function (PromiseArgument) {
   var Promise;
   function throat(size, fn) {
-    var queue = new Deque();
+    var queue = new Denque();
     function run(fn, self, args) {
       if (size) {
         size--;
@@ -49,7 +49,7 @@ module.exports = function (PromiseArgument) {
           args.push(arguments[i]);
         }
         return run(fn, this, args);
-      }
+      };
     } else {
       return function (fn) {
         if (typeof fn !== 'function') {
@@ -62,7 +62,7 @@ module.exports = function (PromiseArgument) {
           args.push(arguments[i]);
         }
         return run(fn, this, args);
-      }
+      };
     }
   }
   if (arguments.length === 1 && typeof PromiseArgument === 'function') {
@@ -77,7 +77,7 @@ module.exports = function (PromiseArgument) {
     }
     return throat(arguments[0], arguments[1]);
   }
-}
+};
 
 /* istanbul ignore next */
 if (typeof Promise === 'function') {

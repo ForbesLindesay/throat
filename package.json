@@ -12,7 +12,7 @@
     "limit"
   ],
   "dependencies": {
-    "double-ended-queue": "^2.1.0-0"
+    "denque": "^1.1.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
