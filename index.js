@@ -1,11 +1,9 @@
-'use strict'
-
-var Deque = require('double-ended-queue');
+'use strict';
 
 module.exports = function (PromiseArgument) {
   var Promise;
   function throat(size, fn) {
-    var queue = new Deque();
+    var queue = new Queue();
     function run(fn, self, args) {
       if (size) {
         size--;
@@ -49,7 +47,7 @@ module.exports = function (PromiseArgument) {
           args.push(arguments[i]);
         }
         return run(fn, this, args);
-      }
+      };
     } else {
       return function (fn) {
         if (typeof fn !== 'function') {
@@ -62,7 +60,7 @@ module.exports = function (PromiseArgument) {
           args.push(arguments[i]);
         }
         return run(fn, this, args);
-      }
+      };
     }
   }
   if (arguments.length === 1 && typeof PromiseArgument === 'function') {
@@ -77,7 +75,7 @@ module.exports = function (PromiseArgument) {
     }
     return throat(arguments[0], arguments[1]);
   }
-}
+};
 
 /* istanbul ignore next */
 if (typeof Promise === 'function') {
@@ -90,3 +88,25 @@ function Delayed(resolve, fn, self, args) {
   this.self = self || null;
   this.args = args;
 }
+
+function Queue() {
+  this._s1 = [];
+  this._s2 = [];
+}
+
+Queue.prototype.push = function (value) {
+  this._s1.push(value);
+};
+
+Queue.prototype.shift = function () {
+  if (!this._s2.length) {
+    while (this._s1.length) {
+      this._s2.push(this._s1.pop());
+    }
+  }
+  return this._s2.pop();
+};
+
+Queue.prototype.isEmpty = function () {
+  return !this._s1.length && !this._s2.length;
+};
