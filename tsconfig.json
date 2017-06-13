@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib":[
+      "es2015",
+      "es2016",
+      "es2017"
+    ],
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "outDir": "lib",
+    "pretty": false
+  },
+  "include": [
+    "test/**/*"
+  ]
+}

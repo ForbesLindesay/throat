@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typescript 1`] = `
+"
+
+test/typescript-example.ts(6,42): error TS2345: Argument of type '\\"foo\\"' is not assignable to parameter of type 'number'.
+test/typescript-example.ts(7,7): error TS2322: Type 'Promise<number>' is not assignable to type 'Promise<string>'.
+  Type 'number' is not assignable to type 'string'.
+test/typescript-example.ts(12,42): error TS2345: Argument of type '\\"foo\\"' is not assignable to parameter of type 'number'.
+test/typescript-example.ts(13,7): error TS2322: Type 'Promise<number>' is not assignable to type 'Promise<string>'.
+test/typescript-example.ts(19,41): error TS2345: Argument of type '(x: number) => Promise<number>' is not assignable to parameter of type '() => Promise<number>'.
+test/typescript-example.ts(20,42): error TS2345: Argument of type '(x: string) => Promise<string>' is not assignable to parameter of type '() => Promise<string>'.
+test/typescript-example.ts(21,7): error TS2322: Type 'Promise<number>' is not assignable to type 'Promise<string>'.
+"
+`;
