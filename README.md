@@ -23,32 +23,16 @@ This returns a function that acts a bit like a lock (exactly as a lock if concur
 Example, only 2 of the following functions will execute at any one time:
 
 ```js
-// with polyfill or in iojs
-require('promise/polyfill')
-var throat = require('throat')(2)
+const throat = require('throat')(2);
 // alternatively provide your own promise implementation
-var throat = require('throat')(require('promise'))(2)
+const throat = require('throat')(require('promise'))(2);
+const promise = Promise.resolve();
 
-var resA = throat(function () {
-  //async stuff
-  return promise
-})
-var resA = throat(function () {
-  //async stuff
-  return promise
-})
-var resA = throat(function () {
-  //async stuff
-  return promise
-})
-var resA = throat(function () {
-  //async stuff
-  return promise
-})
-var resA = throat(function () {
-  //async stuff
-  return promise
-})
+const resA = throat(() => /* async stuff... */ promise);
+const resB = throat(() => /* async stuff... */ promise);
+const resC = throat(() => /* async stuff... */ promise);
+const resD = throat(() => /* async stuff... */ promise);
+const resE = throat(() => /* async stuff... */ promise);
 ```
 
 ### throat(concurrency, worker)
@@ -56,16 +40,12 @@ var resA = throat(function () {
 This returns a function that is an exact copy of `worker` except that it will only execute up to `concurrency` times in parallel before further requests are queued:
 
 ```js
-// with polyfill or in iojs
-require('promise/polyfill')
-var throat = require('throat')
+const throat = require('throat');
 // alternatively provide your own promise implementation
-var throat = require('throat')(require('promise'))
+const throat = require('throat')(require('promise'));
 
-var input = ['fileA.txt', 'fileB.txt', 'fileC.txt', 'fileD.txt']
-var data = Promise.all(input.map(throat(2, function (fileName) {
-  return readFile(fileName)
-})))
+const input = ['fileA.txt', 'fileB.txt', 'fileC.txt', 'fileD.txt'];
+const data = Promise.all(input.map(throat(2, fileName => readFile(fileName))));
 ```
 
 Only 2 files will be read at a time, sometimes limiting parallelism in this way can improve scalability.
