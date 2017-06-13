@@ -16,9 +16,6 @@
     "index.js",
     "index.js.flow"
   ],
-  "dependencies": {
-    "double-ended-queue": "^2.1.0-0"
-  },
   "devDependencies": {
     "coveralls": "^2.11.2",
     "flow-bin": "^0.48.0",
@@ -27,7 +24,7 @@
     "promise": "^7.1.1",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
-    "testit": "^2.0.5",
+    "testit": "^2.1.3",
     "typescript": "^2.3.4"
   },
   "scripts": {
