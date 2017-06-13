@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flow 1`] = `
+"
+
+test/flow-example.js:5
+  5: const adderA = throat(5, (a: number, b: number): Promise<number> => Promise.resolve(a + b));
+                                                              ^^^^^^ number. This type is incompatible with
+  9: const aFail2: Promise<string> = adderA(1, 2);
+                           ^^^^^^ string
+
+test/flow-example.js:8
+  8: const aFail: Promise<number> = adderA(1, 'foo');
+                                              ^^^^^ string. This type is incompatible with the expected param type of
+  5: const adderA = throat(5, (a: number, b: number): Promise<number> => Promise.resolve(a + b));
+                                             ^^^^^^ number
+
+test/flow-example.js:11
+ 11: const adderB = throat((a: number, b: number): Promise<number> => Promise.resolve(a + b), 5);
+                                                           ^^^^^^ number. This type is incompatible with
+ 15: const bFail2: Promise<string> = adderB(1, 2);
+                           ^^^^^^ string
+
+test/flow-example.js:14
+ 14: const bFail: Promise<number> = adderB(1, 'foo');
+                                              ^^^^^ string. This type is incompatible with the expected param type of
+ 11: const adderB = throat((a: number, b: number): Promise<number> => Promise.resolve(a + b), 5);
+                                          ^^^^^^ number
+
+test/flow-example.js:21
+ 21: const tFail: Promise<number> = throttle((x: number) => Promise.resolve(x));
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function call
+  5: declare function throat(size: number): <TResult>(fn: () => Promise<TResult>) => Promise<TResult>;
+                                                          ^^^^^^^^^^^^^^^^^^^^^^ undefined (too few arguments, expected default/rest parameters). This type is incompatible with. See: index.js.flow:5
+ 21: const tFail: Promise<number> = throttle((x: number) => Promise.resolve(x));
+                                                 ^^^^^^ number
+
+test/flow-example.js:22
+ 22: const tFail2: Promise<string> = throttle((x: string) => Promise.resolve(x));
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function call
+  5: declare function throat(size: number): <TResult>(fn: () => Promise<TResult>) => Promise<TResult>;
+                                                          ^^^^^^^^^^^^^^^^^^^^^^ undefined (too few arguments, expected default/rest parameters). This type is incompatible with. See: index.js.flow:5
+ 22: const tFail2: Promise<string> = throttle((x: string) => Promise.resolve(x));
+                                                  ^^^^^^ string
+
+test/flow-example.js:23
+ 23: const tFail3: Promise<string> = throttle(() => Promise.resolve(5));
+                                                                    ^ number. This type is incompatible with
+ 23: const tFail3: Promise<string> = throttle(() => Promise.resolve(5));
+                           ^^^^^^ string
+
+
+Found 7 errors
+"
+`;

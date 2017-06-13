@@ -11,19 +11,30 @@
     "parallelism",
     "limit"
   ],
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "index.js.flow"
+  ],
   "dependencies": {
     "double-ended-queue": "^2.1.0-0"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
+    "flow-bin": "^0.48.0",
     "istanbul": "^0.4.5",
+    "jest": "^20.0.4",
     "promise": "^7.1.1",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
-    "testit": "^2.0.5"
+    "testit": "^2.0.5",
+    "typescript": "^2.3.4"
   },
   "scripts": {
-    "test": "node test/index.js && node test/browser.js",
+    "tsc": "tsc --noEmit",
+    "flow": "flow",
+    "test": "node test/index.js && npm run test:types && node test/browser.js",
+    "test:types": "jest",
     "coverage": "istanbul cover test/index.js",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },
