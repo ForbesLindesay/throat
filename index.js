@@ -99,12 +99,16 @@ Queue.prototype.push = function (value) {
 };
 
 Queue.prototype.shift = function () {
-  if (!this._s2.length) {
-    while (this._s1.length) {
-      this._s2.push(this._s1.pop());
+  var s2 = this._s2;
+  if (s2.length === 0) {
+    var s1 = this._s1;
+    if (s1.length === 0) {
+      return;
     }
+    this._s1 = s2;
+    s2 = this._s2 = s1.reverse();
   }
-  return this._s2.pop();
+  return s2.pop();
 };
 
 Queue.prototype.isEmpty = function () {
