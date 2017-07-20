@@ -24,7 +24,7 @@
     "promise": "^8.0.0",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
-    "testit": "^2.1.3",
+    "testit": "^3.0.0",
     "typescript": "^2.3.4"
   },
   "scripts": {
