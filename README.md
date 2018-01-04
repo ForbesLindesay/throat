@@ -10,9 +10,7 @@ Throttle the parallelism of an asynchronous, promise returning, function / funct
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/throat.svg)](https://saucelabs.com/u/throat)
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/gg9sZwctSLxyov1sJwW6pfyS/ForbesLindesay/throat'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/gg9sZwctSLxyov1sJwW6pfyS/ForbesLindesay/throat.svg' />
-</a>
+
 
 ## Installation
 
