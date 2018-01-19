@@ -20,7 +20,7 @@
     "coveralls": "^2.11.2",
     "flow-bin": "^0.50.0",
     "istanbul": "^0.4.5",
-    "jest": "^20.0.4",
+    "jest": "^22.1.4",
     "promise": "^8.0.0",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
