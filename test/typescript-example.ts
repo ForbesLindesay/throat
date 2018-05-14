@@ -19,3 +19,8 @@ const t2: Promise<string> = throttle(() => Promise.resolve('foo'));
 const tFail: Promise<number> = throttle((x: number) => Promise.resolve(x));
 const tFail2: Promise<string> = throttle((x: string) => Promise.resolve(x));
 const tFail3: Promise<string> = throttle(() => Promise.resolve(5));
+
+const throttle2 = throat(Promise);
+const fn = throttle2(1, () => Promise.resolve(10));
+
+const result = fn();
