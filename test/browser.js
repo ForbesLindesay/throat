@@ -30,6 +30,8 @@ run(__dirname + '/index.js', LOCAL ? 'chromedriver' : 'saucelabs', {
       case 'iphone':
       case 'ipad':
         return version > 5.1;
+      case 'android':
+        return false;
       default:
         return true;
     }
