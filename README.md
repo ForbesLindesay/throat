@@ -10,6 +10,8 @@ Throttle the parallelism of an asynchronous, promise returning, function / funct
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/throat.svg)](https://saucelabs.com/u/throat)
 
+
+
 ## Installation
 
     npm install throat
