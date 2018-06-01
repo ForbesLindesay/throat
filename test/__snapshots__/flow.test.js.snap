@@ -32,8 +32,8 @@ References:
    test/flow-example.js:9:23
      9| const aFail2: Promise<string> = adderA(1, 2);
                               ^^^^^^ [2]
-   <absolute-dir>core.js:605:24
-   605| declare class Promise<+R> {
+   <absolute-dir>core.js:576:24
+   576| declare class Promise<+R> {
                                ^ [3]
 
 
@@ -66,8 +66,8 @@ References:
    test/flow-example.js:15:23
     15| const bFail2: Promise<string> = adderB(1, 2);
                               ^^^^^^ [2]
-   <absolute-dir>core.js:605:24
-   605| declare class Promise<+R> {
+   <absolute-dir>core.js:576:24
+   576| declare class Promise<+R> {
                                ^ [3]
 
 
@@ -116,8 +116,8 @@ References:
    test/flow-example.js:23:23
     23| const tFail3: Promise<string> = throttle(() => Promise.resolve(5));
                               ^^^^^^ [2]
-   <absolute-dir>core.js:605:24
-   605| declare class Promise<+R> {
+   <absolute-dir>core.js:576:24
+   576| declare class Promise<+R> {
                                ^ [3]
 
 
