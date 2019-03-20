@@ -21,7 +21,7 @@
     "flow-bin": "^0.73.0",
     "istanbul": "^0.4.5",
     "jest": "^22.1.4",
-    "promise": "^8.0.0",
+    "promise": "^8.0.3",
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
     "testit": "^2.1.3",
