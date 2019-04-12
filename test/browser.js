@@ -7,7 +7,7 @@ var LOCAL = !process.env.CI && process.argv[2] !== 'sauce';
 var USER = 'throat';
 var ACCESS_KEY = '57db1bf4-537a-4bde-ab8b-1e82eed9db4b';
 
-if (process.env.CI && process.version.indexOf('v6') !== 0) {
+if (process.env.CI && process.version.indexOf('v10') !== 0) {
   // only run the browser tests once
   process.exit(0);
 }
@@ -16,7 +16,7 @@ run(__dirname + '/index.js', LOCAL ? 'chromedriver' : 'saucelabs', {
   accessKey: ACCESS_KEY,
   browserify: true,
   disableSSL: true,
-  filterPlatforms: function (platform, defaultFilter) {
+  filterPlatforms: function(platform, defaultFilter) {
     // exclude some arbitrary browsers to make tests
     // run faster.  Also excludes beta versions of browsers
     if (!defaultFilter(platform)) return false;
@@ -37,8 +37,8 @@ run(__dirname + '/index.js', LOCAL ? 'chromedriver' : 'saucelabs', {
     }
   },
   bail: true,
-  timeout: '30s'
-}).done(function (result) {
+  timeout: '30s',
+}).done(function(result) {
   if (result.passed) {
     testResult.pass('browser tests');
   } else {

@@ -10,10 +10,6 @@ Throttle the parallelism of an asynchronous, promise returning, function / funct
 [![NPM version](https://img.shields.io/npm/v/throat.svg)](https://www.npmjs.com/package/throat)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ForbesLindesay/throat.svg)](https://greenkeeper.io/)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/throat.svg)](https://saucelabs.com/u/throat)
-
-
-
 ## Installation
 
     npm install throat
