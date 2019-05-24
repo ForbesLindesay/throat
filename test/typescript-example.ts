@@ -1,4 +1,4 @@
-import throat = require('../');
+import throat from '../';
 
 const adderA = throat(5, (a: number, b: number) => Promise.resolve(a + b));
 
@@ -16,6 +16,7 @@ const throttle = throat(5);
 
 const t: Promise<number> = throttle(() => Promise.resolve(5));
 const t2: Promise<string> = throttle(() => Promise.resolve('foo'));
+const t3: Promise<number> = throttle((x: number) => Promise.resolve(x), 10);
 const tFail: Promise<number> = throttle((x: number) => Promise.resolve(x));
 const tFail2: Promise<string> = throttle((x: string) => Promise.resolve(x));
 const tFail3: Promise<string> = throttle(() => Promise.resolve(5));

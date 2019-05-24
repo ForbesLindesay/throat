@@ -25,7 +25,7 @@
     "sauce-test": "^1.0.0",
     "test-result": "^2.0.0",
     "testit": "^3.1.0",
-    "typescript": "^2.3.4"
+    "typescript": "^3.4.5"
   },
   "jest": {
     "testEnvironment": "node"
