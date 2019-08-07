@@ -17,7 +17,7 @@
     "index.js.flow"
   ],
   "devDependencies": {
-    "coveralls": "^3.0.0",
+    "coveralls": "^3.0.6",
     "flow-bin": "^0.73.0",
     "istanbul": "^0.4.5",
     "jest": "^22.1.4",
