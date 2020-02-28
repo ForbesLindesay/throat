@@ -18,7 +18,7 @@
   ],
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "flow-bin": "^0.73.0",
+    "flow-bin": "^0.119.1",
     "istanbul": "^0.4.5",
     "jest": "^22.1.4",
     "promise": "^8.0.0",
