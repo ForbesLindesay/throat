@@ -34,8 +34,8 @@ module.exports = function throat(size, fn) {
       );
   }
   function release() {
-    if (!queue.isEmpty()) {
-      var next = queue.shift();
+    var next = queue.shift();
+    if (next) {
       next();
     } else {
       size++;
@@ -96,14 +96,10 @@ Queue.prototype.shift = function () {
   if (s2.length === 0) {
     var s1 = this._s1;
     if (s1.length === 0) {
-      return;
+      return undefined;
     }
     this._s1 = s2;
     s2 = this._s2 = s1.reverse();
   }
   return s2.pop();
-};
-
-Queue.prototype.isEmpty = function () {
-  return !this._s1.length && !this._s2.length;
 };
