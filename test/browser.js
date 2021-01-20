@@ -13,30 +13,25 @@ run(__dirname + '/index.js', LOCAL ? 'chromedriver' : 'saucelabs', {
   browserify: true,
   disableSSL: true,
   filterPlatforms: function (platform, defaultFilter) {
-    // exclude some arbitrary browsers to make tests
-    // run faster.  Also excludes beta versions of browsers
-    if (!defaultFilter(platform)) return false;
-    // these platforms don't support ES5
     var version = +platform.version;
     switch (platform.browserName) {
       case 'MicrosoftEdge':
-        return version >= 15;
+        return version === 15 || version >= 87;
       case 'internet explorer':
         return false;
       case 'chrome':
-        return version >= 55;
+        return version === 55 || version >= 87;
       case 'firefox':
-        return version >= 52;
+        return version === 52 || version >= 84;
       case 'safari':
-        return version >= 10.1;
+        return version === 12 || version >= 14;
       case 'iphone':
-        return version >= 11.0;
       case 'ipad':
-        return version >= 13.0;
+        return version === 11.0 || version >= 14;
       case 'android':
         return false;
       default:
-        return true;
+        return defaultFilter(platform);
     }
   },
   bail: true,
