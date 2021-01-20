@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - '8'
-  - '10'
-
-# Use faster Docker architecture on Travis.
-sudo: false
-
-script: 'npm test && npm run coveralls'
