@@ -23,7 +23,23 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run test
-      - run: npm run coveralls
+      - run: npm run coverage
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@1.1.2
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.node-version }}
+          parallel: true
+
+  finish_coveralls:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@1.1.2
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
 
   test_browsers:
     runs-on: ubuntu-latest
