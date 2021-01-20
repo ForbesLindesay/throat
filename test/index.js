@@ -335,6 +335,36 @@ test('type errors', function () {
   });
 });
 
+test('sync errors are converted to async errors', function () {
+  var lock = throat(1);
+  return Promise.all([
+    lock(() => {
+      throw new Error('whatever');
+    }).catch(() => true),
+    lock(() => {
+      throw new Error('whatever');
+    }).catch(() => true),
+    lock(() => {
+      throw new Error('whatever');
+    }).catch(() => true),
+  ]).then((results) => {
+    assert.deepStrictEqual(results, [true, true, true]);
+  });
+});
+
+test('handles loads of promises', function () {
+  var lock = throat(1, (i) => Promise.resolve(i));
+  var results = [];
+  var expected = [];
+  for (var i = 0; i < 64 * 10 + 1; i++) {
+    results.push(lock(i));
+    expected.push(i);
+  }
+  return Promise.all(results).then((results) => {
+    assert.deepStrictEqual(results, expected);
+  });
+});
+
 async function supportsAsyncStackTraces() {
   async function innerFunction() {
     await new Promise((resolve) => setTimeout(resolve, 10));

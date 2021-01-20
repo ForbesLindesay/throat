@@ -120,12 +120,6 @@ Queue.prototype.push = function (value) {
 };
 
 Queue.prototype.shift = function () {
-  if (
-    this._pushBlock === this._shiftBlock &&
-    this._pushIndex === this._shiftIndex
-  ) {
-    return undefined;
-  }
   if (this._shiftIndex === blockSize) {
     this._shiftIndex = 0;
     var s2 = this._s2;
@@ -138,6 +132,12 @@ Queue.prototype.shift = function () {
       s2 = this._s2 = s1.reverse();
     }
     this._shiftBlock = s2.pop();
+  }
+  if (
+    this._pushBlock === this._shiftBlock &&
+    this._pushIndex === this._shiftIndex
+  ) {
+    return undefined;
   }
   var result = this._shiftBlock[this._shiftIndex];
   this._shiftBlock[this._shiftIndex++] = null;
