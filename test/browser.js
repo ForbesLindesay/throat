@@ -7,38 +7,36 @@ var LOCAL = !process.env.CI && process.argv[2] !== 'sauce';
 var USER = 'throat';
 var ACCESS_KEY = '57db1bf4-537a-4bde-ab8b-1e82eed9db4b';
 
-if (process.env.CI && process.version.indexOf('v10') !== 0) {
-  // only run the browser tests once
-  process.exit(0);
-}
 run(__dirname + '/index.js', LOCAL ? 'chromedriver' : 'saucelabs', {
   username: USER,
   accessKey: ACCESS_KEY,
   browserify: true,
   disableSSL: true,
-  filterPlatforms: function(platform, defaultFilter) {
-    // exclude some arbitrary browsers to make tests
-    // run faster.  Also excludes beta versions of browsers
-    if (!defaultFilter(platform)) return false;
-    // these platforms don't support ES5
+  filterPlatforms: function (platform, defaultFilter) {
     var version = +platform.version;
     switch (platform.browserName) {
+      case 'MicrosoftEdge':
+        return version === 15 || version >= 87;
       case 'internet explorer':
-        return version > 8;
+        return false;
+      case 'chrome':
+        return version === 55 || version >= 87;
       case 'firefox':
-        return version > 19 && version !== 49;
+        return version === 52 || version >= 84;
+      case 'safari':
+        return version === 12 || version >= 14;
       case 'iphone':
       case 'ipad':
-        return version > 5.1;
+        return version === 11.0 || version >= 14;
       case 'android':
         return false;
       default:
-        return true;
+        return defaultFilter(platform);
     }
   },
   bail: true,
   timeout: '30s',
-}).done(function(result) {
+}).done(function (result) {
   if (result.passed) {
     testResult.pass('browser tests');
   } else {
