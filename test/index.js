@@ -348,7 +348,7 @@ test('sync errors are converted to async errors', function () {
       throw new Error('whatever');
     }).catch(() => true),
   ]).then((results) => {
-    assert.deepStrictEqual(results, [true, true, true]);
+    assert.deepEqual(results, [true, true, true]);
   });
 });
 
@@ -361,7 +361,7 @@ test('handles loads of promises', function () {
     expected.push(i);
   }
   return Promise.all(results).then((results) => {
-    assert.deepStrictEqual(results, expected);
+    assert.deepEqual(results, expected);
   });
 });
 
