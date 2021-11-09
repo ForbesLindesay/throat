@@ -121,7 +121,6 @@ Queue.prototype.push = function (value) {
 
 Queue.prototype.shift = function () {
   if (this._shiftIndex === blockSize) {
-    this._shiftIndex = 0;
     var s2 = this._s2;
     if (s2.length === 0) {
       var s1 = this._s1;
@@ -131,6 +130,7 @@ Queue.prototype.shift = function () {
       this._s1 = s2;
       s2 = this._s2 = s1.reverse();
     }
+    this._shiftIndex = 0;
     this._shiftBlock = s2.pop();
   }
   if (
