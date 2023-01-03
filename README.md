@@ -4,7 +4,7 @@ Throttle the parallelism of an asynchronous, promise returning, function / funct
 
 [Professionally supported throat is now available](https://tidelift.com/subscription/pkg/npm-throat?utm_source=npm-throat&utm_medium=referral&utm_campaign=readme)
 
-[![Build Status](https://img.shields.io/github/workflow/status/ForbesLindesay/throat/Test/master?style=for-the-badge)](https://github.com/ForbesLindesay/throat/actions?query=workflow%3ATest+branch%3Amaster)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/ForbesLindesay/throat/test.yml?branch=master&style=for-the-badge)](https://github.com/ForbesLindesay/throat/actions/workflows/test.yml?query=branch%3Amaster)
 [![Coveralls github branch](https://img.shields.io/coveralls/github/ForbesLindesay/throat/master?color=brightgreen&style=for-the-badge)](https://coveralls.io/github/ForbesLindesay/throat)
 [![Rolling Versions](https://img.shields.io/badge/Rolling%20Versions-Enabled-brightgreen?style=for-the-badge)](https://rollingversions.com/ForbesLindesay/throat)
 [![NPM version](https://img.shields.io/npm/v/throat?style=for-the-badge)](https://www.npmjs.com/package/throat)
@@ -24,11 +24,21 @@ Example, only 2 of the following functions will execute at any one time:
 ```js
 const throat = require('throat')(2);
 
-const resA = throat(async () => { /* async stuff... */ });
-const resB = throat(async () => { /* async stuff... */ });
-const resC = throat(async () => { /* async stuff... */ });
-const resD = throat(async () => { /* async stuff... */ });
-const resE = throat(async () => { /* async stuff... */ });
+const resA = throat(async () => {
+  /* async stuff... */
+});
+const resB = throat(async () => {
+  /* async stuff... */
+});
+const resC = throat(async () => {
+  /* async stuff... */
+});
+const resD = throat(async () => {
+  /* async stuff... */
+});
+const resE = throat(async () => {
+  /* async stuff... */
+});
 ```
 
 ### throat(concurrency, worker)
