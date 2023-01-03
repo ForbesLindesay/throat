@@ -1,7 +1,6 @@
 'use strict';
 
 var assert = require('assert');
-var fs = require('fs');
 var test = require('testit');
 var throat = require('../');
 
