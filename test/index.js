@@ -520,3 +520,44 @@ test('stack traces - ready provided fn', async function () {
     ),
   ]);
 });
+
+test('https://github.com/ForbesLindesay/throat/issues/61', function () {
+  var batchSize = 256;
+  var batchCount = 256;
+  var lock = throat(1);
+  return runBatch(0);
+  function runBatch(batchIdx) {
+    if (batchIdx >= batchCount) return;
+    var jobs = [];
+    for (let i = 0; i < batchSize; i++) {
+      jobs.push(job());
+    }
+    const results = jobs.map((job) => lock(job));
+    function testNext(idx) {
+      if (idx >= jobs.length) return;
+      try {
+        assert(jobs[idx].isRun);
+        for (let i = idx + 1; i < jobs.length; i++) {
+          assert(jobs[i].isRun === false);
+        }
+        if (Math.random() > 0.5) {
+          jobs[idx].complete();
+        } else {
+          jobs[idx].fail();
+        }
+      } catch (ex) {
+        ex.message += `(batch: ${batchIdx}, job: ${idx})`;
+        throw ex;
+      }
+      return results[idx]
+        .catch(() => {
+          // ignore test error
+        })
+        .then(() => testNext(idx + 1));
+    }
+    return testNext(0).then(() => {
+      assert(jobs.every((job) => job.isRun));
+      return runBatch(batchIdx + 1);
+    });
+  }
+});
