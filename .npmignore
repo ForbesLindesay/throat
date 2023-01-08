@@ -1,0 +1,7 @@
+.github
+test
+.flowconfig
+.gitignore
+.prettierrc
+*.flow
+tsconfig.json
